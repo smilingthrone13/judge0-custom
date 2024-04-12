@@ -23,7 +23,7 @@ x-config: &config
 
 services:
   server:
-    image: judge0/judge0:latest
+    image: judge0-custom:latest
     environment:
       <<: *config
       <<: *db
@@ -35,7 +35,7 @@ services:
     restart: always
 
   worker:
-    image: judge0/judge0:latest
+    image: judge0-custom:latest
     command: ["./scripts/workers"]
     environment:
       <<: *config

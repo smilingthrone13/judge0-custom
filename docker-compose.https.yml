@@ -40,7 +40,7 @@ services:
     restart: always
 
   server:
-    image: judge0/judge0:latest
+    image: judge0-custom:latest
     environment:
       - VIRTUAL_HOST=subdomain.yourdomain.tld
       - LETSENCRYPT_HOST=subdomain.yourdomain.tld
@@ -51,7 +51,7 @@ services:
     restart: always
 
   worker:
-    image: judge0/judge0:latest
+    image: judge0-custom:latest
     command: ["./scripts/workers"]
     volumes:
       - ./judge0.conf:/judge0.conf:ro
