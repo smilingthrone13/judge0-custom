@@ -9,7 +9,7 @@ x-logging:
 
 services:
   server:
-    image: judge0-custom:latest
+    image: smilingthrone13/judge0-custom:v1
     volumes:
       - ./judge0.conf:/judge0.conf:ro
     ports:
@@ -19,7 +19,7 @@ services:
     restart: always
 
   worker:
-    image: judge0-custom:latest
+    image: smilingthrone13/judge0-custom:v1
     command: ["./scripts/workers"]
     volumes:
       - ./judge0.conf:/judge0.conf:ro

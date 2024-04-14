@@ -1,9 +1,9 @@
-FROM judge0-custom/compilers:2.2.8 AS production
+FROM smilingthrone13/judge0-compilers-custom:v1 AS production
 
-#ENV JUDGE0_HOMEPAGE "https://judge0.com"
-#LABEL homepage=$JUDGE0_HOMEPAGE
+ENV JUDGE0_HOMEPAGE "https://judge0.com"
+LABEL homepage=$JUDGE0_HOMEPAGE
 
-ENV JUDGE0_SOURCE_CODE "C:\Users\l.konstantin\Documents\Projects\judge0-custom"
+ENV JUDGE0_SOURCE_CODE "https://github.com/smilingthrone13/judge0-custom"
 LABEL source_code=$JUDGE0_SOURCE_CODE
 
 ENV JUDGE0_MAINTAINER "kaseta <test123@gmail.com>"
@@ -28,14 +28,10 @@ EXPOSE $VIRTUAL_PORT
 WORKDIR /api
 
 COPY Gemfile* ./
-RUN RAILS_ENV=production bundle
+RUN RAILS_ENV=production
 
-#COPY cron /etc/cron.d
-#RUN cat /etc/cron.d/* | crontab -
-#COPY hello-cron /etc/cron.d/hello-cron
-#RUN chmod 0644 /etc/cron.d/hello-cron
-#RUN crontab /etc/cron.d/hello-cron
-#RUN touch /var/log/cron.log
+COPY cron /etc/cron.d
+RUN cat /etc/cron.d/* | crontab -
 
 COPY . .
 
