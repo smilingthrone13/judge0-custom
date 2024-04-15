@@ -6,11 +6,19 @@
 source ./scripts/load-config
 export | sudo tee /api/environment
 
+date_now() {
+    echo -n $(date +"%Y-%m-%d-%H-%M-%S")
+}
+
 for i in $(seq 1 $RESTART_MAX_TRIES); do
+    echo "[$(date_now)] Starting server."
     [[ -f tmp/pids/server.pid ]] && rm -f tmp/pids/server.pid
 
     rails db:create db:migrate db:seed
     rails s -b 0.0.0.0
     [[ $? -eq 0 ]] && break
+    echo "[$(date_now)] Server stopped."
     sleep 2s
 done
+
+echo "[$(date_now)] Server started."

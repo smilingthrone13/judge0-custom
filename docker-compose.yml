@@ -10,6 +10,7 @@ x-logging:
 services:
   server:
     image: smilingthrone13/judge0-custom:v1
+    command: ["./scripts/server"]
     volumes:
       - ./judge0.conf:/judge0.conf:ro
     ports:
